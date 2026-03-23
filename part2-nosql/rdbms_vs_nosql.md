@@ -1,0 +1,11 @@
+## Database Recommendation  
+
+For a healthcare patient management system, I would recommend using `MySQL` (`a relational database`) as the primary database. Healthcare systems require strong guarantees around `data accuracy`, `consistency`, and `reliability`, especially for critical data such as patient records, prescriptions, and billing information. MySQL follows `ACID` properties (Atomicity, Consistency, Isolation, Durability), and ACID properties are designed to prevent partial updates, preserve consistency, isolate concurrent changes, and keep committed data durable after failures.
+    
+For example, updating a patient’s treatment record must either fully succeed or fail without leaving partial updates, which is crucial in medical contexts. In a hospital setting, updating medications, diagnoses, billing, appointments, and patient identifiers must be exact, because inconsistent or half-written records can directly affect patient safety.
+
+From the perspective of the `CAP theorem`, healthcare systems prioritize `Consistency` and `Partition Tolerance` (CP systems) over `Availability`. It is more important that all users see the same accurate patient data rather than risking inconsistencies for higher availability. MySQL-based systems are better suited for such requirements compared to MongoDB, which follows a more flexible `BASE` (Basically Available, Soft state, Eventually consistent) approach.
+
+However, if the system needs to incorporate a `fraud detection module`, the recommendation may evolve into a `hybrid approach`. Fraud detection often involves processing large volumes of semi-structured or unstructured data (e.g., logs, behavioral patterns) and requires scalability and fast ingestion. In such cases, MongoDB can be used alongside MySQL to handle high-velocity, flexible data and support real-time analytics.
+
+Therefore, MySQL should be the core transactional database for patient management, while MongoDB can complement it for analytics-heavy or less structured workloads. This hybrid architecture balances consistency with scalability, making it suitable for modern healthcare systems.
